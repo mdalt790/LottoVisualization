@@ -1,16 +1,203 @@
 <html>
   <head>
-  	<script src="https://cdn.jsdelivr.net/npm/vega@latest"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vega-lite@latest"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vega-embed@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+    
+    <style>
+      body {
+        font-family: sans-serif;
+        overflow-x: hidden;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        flex-direction: column; 
+      }
+      .panel {
+        background-color: white;
+        padding-top: 100px;
+        height: 100vh;
+        width: 50%; 
+        background-color: while;
+        opacity: 0;
+        margin: 0 auto;
+        
+      }
+      
+      #title {
+        font-size: 50px;
+        text-align: center;
+      }
+      #titlePage{
+        font-size: 50px;
+        text-align: center;
+      }
+      .image {
+        padding-top: 100px;
+        display: block;
+        margin: 0 auto;
+        width: 60%;
+      }
+      .image2 {
+        padding-top: 100px;
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        height: 50%;
+      }
+      .text-content {
+        padding-top: 100px;
+        font-size: 50px;
+      }
+      .text-content-graph {
+        align-items: center;
+        padding-top: 50px;
+        font-size: 40px;
+      }
+
+    </style>
   </head>
   <body>
-    <title> Massachusetts Lottery map </title>
-    <h1>Massachusetts County Map</h1>
-  	<div id="county_map"></div>
-    <!-- <h1>Massachusetts Town Map</h1>
-    <div id="town_map"></div> -->
+    <div class='panel'> 
+      <div id='titlePage'>
+        Can We Discover Patterns In The Massachusetts Lottery?
+      </div>
+      <div>
+        <img class="image2" src="Pictures/TheLottery.jpg">
+        <div class="text-content">
+          <p>Jerry and Marge Selbee used math and hard work to outsmart the lottery in Michigan. Is it possible to use public data and do the same?
+            Well probably not but maybe we can notice some interesting patterns in the Massachusetts lottery. Using over 500,000 winners over the course
+            of the last 4 years we can examine where people won, how much they won, and where the most winners occur. Using this data maybe we can find some interesting patterns.
+          </p>
+          <p>
+            Where should we start? Well one might assume that the most populace areas would tend to sell the most tickets so they would see the most winnings tickets. Lets analyze if that
+            is true.
+          </p>
+          <img class="image" src="Pictures/LotteryCouple.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div id="massCountyPopulation"></div>
+      <div class="text-content-graph">
+        <p>
+          Here we see the most populace county is Middlesex. Nothing too interesting now lets look at the total amount of winnings
+          per county it should look almost exactly the same.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div id="massCountyTotalAmount"></div>
+      <div class="text-content-graph">
+        <p>
+          Well the total winnings per county looks exactly the same as one might expect. The more people the more tickets sold the more
+          winners. Lets just check to make sure the numbers of winners in each county look exactly the same as well.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div id="massCountyTotalAmountOfWinners"></div>
+      <div class="text-content-graph">
+        <p>
+          ... Welp it looks exactly the same it looks like we will never find anything interesting with our data oh well. Just kidding this is just a feature 
+          of this type of visualization just like Jerry and Marge we have to go one step deeper.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div id="massCountyAmountPerWinner"></div>
+      <div class="text-content-graph">
+        <p>
+          Woah this map looks totally different what going on here? What we see is the average amount won by each winner. Essentially
+          what is the most profitable county to win in on average. That title belongs to Hamphire county. Now does that make it any easier to win
+          definietly not but it does tell you on average where you want to win. Its important to remember most winners are not winning the big megamillions but instead
+          smaller payouts of a few thousand dollars.
+        </p>
+      </div>
+    </div>
+
+
+
+    <!-- towns -->
+    <div class="panel">
+      <div id="massTownPopulation"></div>
+      <div class="text-content-graph">
+        <p>
+          Why dont we go through the same process but for each town in Massachusetts although we may already know how this is going to go.
+          Here we see the most populace town is Boston to no ones surprise.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div id="massTownTotalAmount"></div>
+      <div class="text-content-graph">
+        <p>
+          Now we see the same pattern arise. Boston has the most money won because it has the highest population.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div id="massTownTotalAmountOfWinners"></div>
+      <div class="text-content-graph">
+        <p>
+          Of course Boston also has the most amount of winners out of all towns.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div id="massTownAmountPerWinner"></div>
+      <div class="text-content-graph">
+        <p>
+          Now we see the interesting part the on average best towns to win in are Belchertown, Ware, Hardwick, and Sheffield.
+          Thats quite interesting these towns are no where near the most populated but on average winners earn the most here.
+          Does that mean we should go and buy thousands of dollars worth of tickets like Jerry and Marge? Well not quite... once again
+          this just means if you win you will most likely win the most in these small towns. We werent able to crack the case like Jerry and Marge
+          but we discovered where would be the best town to win and I think im going to buy a lotto ticket when I visit my hometown of Sheffield!
+        </p>
+      </div>
+    </div>
 
     <script src="MassMap.js"></script>
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+    
+      gsap.to(".panel:first-child", {opacity: 1, duration: 0});
+
+      gsap.utils.toArray(".panel").forEach((panel, i, panels) => {
+        ScrollTrigger.create({
+          trigger: panel,
+          start: "top center",
+          end: "bottom top",
+
+          onEnter: function() {
+            gsap.to(panel, {opacity: 1, duration: 1});
+          },
+          onLeaveBack: () => gsap.to(panel, {opacity: 0, duration: 1}),
+          markers: false,
+        });
+      });
+
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+      ScrollTrigger.create({
+        trigger: document.body,
+        start: "bottom bottom",
+        once: false,
+        onEnter: () => {
+          gsap.to(window, {duration: 2, scrollTo: {y: 10}});
+        }
+      });
+  </script>
   </body>
 </html>
